@@ -34,6 +34,6 @@ class Solution:
         if crits[1]==-1:
             return [-1,-1]
         maxdis=crits[-1]-start
-        print(start,crits[-1])
+       
         
         return [mindis,maxdis]
