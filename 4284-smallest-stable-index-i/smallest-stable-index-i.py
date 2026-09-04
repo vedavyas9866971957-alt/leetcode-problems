@@ -1,13 +1,19 @@
 class Solution:
     def firstStableIndex(self, nums: list[int], k: int) -> int:
-        ma=nums[0]
-        for i in range(len(nums)):
-            ma=nums[i] if nums[i]>ma else ma
-            mi=nums[i]
-            for j in range(i,len(nums)):
-                mi=nums[j] if nums[j]<mi else mi
-            if ma-mi<=k:
+        n = len(nums)
+
+        suffix_min = [0] * n
+        suffix_min[-1] = nums[-1]
+
+        for i in range(n - 2, -1, -1):
+            suffix_min[i] = min(nums[i], suffix_min[i + 1])
+
+        ma = nums[0]
+
+        for i in range(n):
+            ma = max(ma, nums[i])
+
+            if ma - suffix_min[i] <= k:
                 return i
 
         return -1
-            
