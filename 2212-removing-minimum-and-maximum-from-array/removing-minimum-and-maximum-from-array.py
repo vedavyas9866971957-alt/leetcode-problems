@@ -1,5 +1,8 @@
 class Solution:
     def minimumDeletions(self, nums: List[int]) -> int:
+        n=len(nums)
+        if n<=2:
+            return n
         minind=0
         maxind=0
         for i,val in enumerate(nums):
@@ -7,7 +10,7 @@ class Solution:
                 minind=i
             if val>nums[maxind]:
                 maxind=i
-        n=len(nums)
+        
         left=min(maxind,minind)
         right=max(maxind,minind)
         leftfirst=left+1+min(right-left,n-right)
