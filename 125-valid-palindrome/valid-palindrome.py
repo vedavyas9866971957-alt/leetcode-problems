@@ -4,7 +4,7 @@ class Solution:
         for char in s:
             if char.isalpha():
                 res+=char.lower()
-            elif char.isalnum():
+            elif char.isdigit():
                 res+=char
         return res==res[::-1]
 
