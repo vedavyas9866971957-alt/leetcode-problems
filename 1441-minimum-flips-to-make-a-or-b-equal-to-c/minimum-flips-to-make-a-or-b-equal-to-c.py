@@ -1,28 +1,20 @@
 class Solution:
     def minFlips(self, a: int, b: int, c: int) -> int:
-        a = bin(a)[2:]
-        b = bin(b)[2:]
-        c = bin(c)[2:]
-
-        n = max(len(a), len(b), len(c))
-
-        a = a.zfill(n)
-        b = b.zfill(n)
-        c = c.zfill(n)
-
         count = 0
 
-        for i in range(n):
-            x = int(a[i])
-            y = int(b[i])
-            z = int(c[i])
+        while a > 0 or b > 0 or c > 0:
+            abit = a & 1
+            bbit = b & 1
+            cbit = c & 1
 
-            if (x | y) == z:
-                continue
-
-            if z == 1:
-                count += 1
+            if cbit == 1:
+                if (abit | bbit) == 0:
+                    count += 1
             else:
-                count += x + y
+                count += abit + bbit
+
+            a >>= 1
+            b >>= 1
+            c >>= 1
 
         return count
