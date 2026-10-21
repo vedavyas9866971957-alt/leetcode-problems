@@ -1,24 +1,20 @@
 class Solution:
     def minOperations(self, s: str) -> int:
-        def issorted(s):
-            for i in range(1,len(s)):
-                if s[i-1]>s[i]:
-                    return False
-            return True
-        if issorted(s):
-            return 0
-        if len(s)==2:
-            return -1
-        mi=min(s)
-        ma=max(s)
-        if mi==s[0] or ma==s[-1]:
-            return 1
-        if s.count(mi)>1 or s.count(ma)>1:
-            return 2
-        if mi==s[-1] and ma==s[0]:
-            return 3
-        else:
-            return 2
-        
 
-        
+        if len(s) == 2 and s[0] > s[1]:
+            return -1                       #  ans = -1
+
+        for ch1, ch2 in pairwise(s):
+            if ch1 > ch2: break
+        else: return 0                      #   ans = 0
+
+        mn, mx = min(s[1:-1]), max(s[1:-1])
+        lft, rgt = s[0], s[-1]
+
+        if lft <= min(rgt, mn) or rgt >= max(lft, mx):
+            return 1                        #   ans = 1
+
+        elif rgt >= mn or lft <= mx:
+            return 2                        #   ans = 2
+
+        else: return 3                      #   ans = 3
