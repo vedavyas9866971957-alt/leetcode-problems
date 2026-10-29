@@ -2,7 +2,7 @@ class Trie:
 
     def __init__(self):
         self.children={}
-        self.end=False
+    
 
     def insert(self, word: str) -> None:
         node=self
@@ -10,11 +10,11 @@ class Trie:
             if ch not in node.children:
                 node.children[ch]=Trie()
             node=node.children[ch]
-        node.end=True
+        node.children["#"]=True
 
     def search(self, word: str) -> bool:
         x=self._walk(word)
-        return x is not None and x.end
+        return x is not None and "#" in x.children
 
     def startsWith(self, prefix: str) -> bool:
         return self._walk(prefix) is not None
