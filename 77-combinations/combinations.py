@@ -2,12 +2,10 @@ class Solution:
     def combine(self, n: int, k: int) -> list[list[int]]:
         res=[]
         def backtrack(comb,f):
-            if len(comb)>k:
-                return 
             if len(comb)==k:
                 res.append(comb.copy())
                 return
-            for i in range(f,n+1):
+            for i in range(f,n-(k-len(comb))+2):
                 #choose
                 comb.append(i)
                 #backtrack
