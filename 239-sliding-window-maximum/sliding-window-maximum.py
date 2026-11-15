@@ -3,7 +3,7 @@ class Solution:
             q=deque()
             res=[]
             for i,val in enumerate(nums):
-                while(q and val>nums[q[-1]]):#=
+                while(q and val>=nums[q[-1]]):#=
                     q.pop()
                 q.append(i)
                 
