@@ -1,24 +1,19 @@
 class Solution:
-    def recoverTree(self, root):
-        cur, node, cands = root, TreeNode(-float("inf")), []
-        while cur:
-            if cur.left:
-                pre = cur.left
-                while pre.right and pre.right != cur:
-                    pre = pre.right
-                if not pre.right:
-                    pre.right = cur
-                    cur = cur.left
-                else:
-                    pre.right = None
-                    if cur.val < node.val:
-                        cands += [node, cur]
-                    node = cur
-                    cur = cur.right
-            else:
-                if cur.val < node.val:
-                    cands += [node, cur]
-                node = cur
-                cur = cur.right
-            
-        cands[0].val, cands[-1].val = cands[-1].val, cands[0].val
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        self.first = self.second = self.prev = None
+
+        def inorder(node):
+            if not node:
+                return
+            inorder(node.left)
+            if self.prev and self.prev.val > node.val:
+                if not self.first:
+                    self.first = self.prev
+                self.second = node
+            self.prev = node
+            inorder(node.right)
+
+        inorder(root)
+
+        # Swap the values
+        self.first.val, self.second.val = self.second.val, self.first.val
