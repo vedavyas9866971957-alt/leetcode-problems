@@ -10,6 +10,7 @@ class Solution:
                 if not self.first:
                     self.first = self.prev
                 self.second = node
+                
             self.prev = node
             inorder(node.right)
 
